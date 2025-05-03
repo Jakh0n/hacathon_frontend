@@ -102,10 +102,8 @@ export default function Dashboard() {
 	return (
 		<div
 			className={cn(
-				'h-full max-w-6xl mx-auto',
-				tenant?.config.theme === 'dark'
-					? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black'
-					: 'bg-gradient-to-br from-blue-50 via-gray-100 to-white'
+				'min-h-screen w-full',
+				tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
 			)}
 		>
 			{/* Navbar */}
@@ -120,12 +118,13 @@ export default function Dashboard() {
 			{/* Sidebar and Main Content */}
 			<div className='flex h-full'>
 				{/* Sidebar */}
-				{tenant && <SideBar setTenantId={setTenantId} tenant={tenant} />}
+				{tenant && <SideBar setTenantId={handleTenantSelect} tenant={tenant} />}
 				{/* Main Content */}
 				<main
-					className={`flex-1 p-6 mt-16 ${
+					className={cn(
+						'flex-1 p-6 mt-16',
 						tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
-					}`}
+					)}
 				>
 					{!tenant ? (
 						<SelectTenant
