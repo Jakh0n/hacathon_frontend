@@ -73,18 +73,23 @@ export default function Dashboard() {
 	}, [])
 
 	// Handle tenant selection
-	const handleTenantSelect = async (e: React.FormEvent) => {
-		e.preventDefault()
-		if (!tenantId || !['tenant1', 'tenant2'].includes(tenantId)) {
+	const handleTenantSelect = async (tenantId: string) => {
+		setIsLoading(true)
+		try {
+			const tenantData = await fetchTenantConfig(tenantId)
+			setTenant(tenantData)
+			localStorage.setItem('tenantId', tenantId)
+		} catch (error: any) {
 			toast({
 				title: 'Error',
-				description: 'Please enter a valid tenant ID (tenant1 or tenant2)',
+				description: `Failed to fetch tenant configuration: ${
+					error.response?.data?.error || error.message
+				}`,
 				variant: 'destructive',
 			})
-			return
+		} finally {
+			setIsLoading(false)
 		}
-		await loadTenantConfig(tenantId)
-		router.push('/')
 	}
 
 	// Clear tenant session
@@ -117,7 +122,11 @@ export default function Dashboard() {
 				{/* Sidebar */}
 				{tenant && <SideBar setTenantId={setTenantId} tenant={tenant} />}
 				{/* Main Content */}
-				<main className='flex-1 p-6 mt-16'>
+				<main
+					className={`flex-1 p-6 mt-16 ${
+						tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+					}`}
+				>
 					{!tenant ? (
 						<SelectTenant
 							setTenantId={setTenantId}

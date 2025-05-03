@@ -5,7 +5,7 @@ interface NavbarProps {
 	tenantId: string
 	setTenantId: (id: string) => void
 	isLoading: boolean
-	handleTenantSelect: (e: React.FormEvent) => Promise<void>
+	handleTenantSelect: (tenantId: string) => Promise<void>
 	clearTenant: () => void
 }
 const Navbar = ({
@@ -33,7 +33,7 @@ const Navbar = ({
 							<option value='tenant2'>Tenant 2</option>
 						</select>
 						<Button
-							onClick={handleTenantSelect}
+							onClick={() => handleTenantSelect(tenantId)}
 							disabled={isLoading}
 							className='ml-2 py-1 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors'
 						>

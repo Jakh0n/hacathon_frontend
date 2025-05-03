@@ -27,7 +27,7 @@ export default function RootLayout({
 			<body
 				className={`${montserrat.variable} ${spaceGrotesk.variable} font-sans`}
 			>
-				<div className=''>{children}</div>
+				<div className='bg-white'>{children}</div>
 			</body>
 		</html>
 	)
