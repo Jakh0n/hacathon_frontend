@@ -7,6 +7,7 @@ import { fetchTenantConfig } from '@/lib/api'
 import { useSocket } from '@/lib/socket'
 import { cn } from '@/lib/utils'
 import { Tenant } from '@/types'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import DashboardModules from '../_components/dashboard-modules'
 import SelectTenant from '../_components/select-tenant'
@@ -19,6 +20,7 @@ export default function Dashboard() {
 	const { toast } = useToast()
 	const socket = useSocket()
 	const [tenant, setTenant] = useState<Tenant | null>(null)
+	const router = useRouter()
 
 	// Fetch tenant configuration
 	const loadTenantConfig = async (id: string) => {
@@ -82,6 +84,7 @@ export default function Dashboard() {
 			return
 		}
 		await loadTenantConfig(tenantId)
+		router.push('/')
 	}
 
 	// Clear tenant session
@@ -94,7 +97,7 @@ export default function Dashboard() {
 	return (
 		<div
 			className={cn(
-				'h-full',
+				'h-full max-w-6xl mx-auto',
 				tenant?.config.theme === 'dark'
 					? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black'
 					: 'bg-gradient-to-br from-blue-50 via-gray-100 to-white'

@@ -16,7 +16,7 @@ const Navbar = ({
 	clearTenant,
 }: NavbarProps) => {
 	return (
-		<div className='fixed z-40 w-full bg-gray-300 shadow-lg p-4 border-b h-[10vh] backdrop-blur-lg bg-white/30  border-gray-500 rounded-lg '>
+		<div className='fixed z-40 w-full bg-gray-300 shadow-lg p-4 border-b h-[10vh] backdrop-blur-lg bg-white/30  border-gray-500 rounded-lg max-w-6xl mx-auto '>
 			<nav className=' flex justify-between  items-center '>
 				<div className='flex  items-center'>
 					<h1 className='text-xl max-sm:hidden font-semibold text-indigo-400  mr-2'>

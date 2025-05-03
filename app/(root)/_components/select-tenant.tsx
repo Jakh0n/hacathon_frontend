@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button'
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 interface SelectTenantProps {
 	setTenantId: (tenantId: string) => void
@@ -16,6 +17,14 @@ const SelectTenant = ({
 	isLoading,
 	handleTenantSelect,
 }: SelectTenantProps) => {
+	const router = useRouter()
+
+	useEffect(() => {
+		if (tenantId === 'tenant1' || tenantId === 'tenant2') {
+			router.push(`/tenant/${tenantId}`)
+		}
+	}, [tenantId, router])
+
 	return (
 		<Card className='max-w-md mx-auto mt-12 shadow-xl'>
 			<CardHeader>
