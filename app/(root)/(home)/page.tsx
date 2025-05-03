@@ -102,7 +102,7 @@ export default function Dashboard() {
 	return (
 		<div
 			className={cn(
-				'min-h-screen w-full',
+				'min-h-screen max-w-6xl mx-auto ',
 				tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
 			)}
 		>
