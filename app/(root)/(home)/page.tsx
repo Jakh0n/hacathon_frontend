@@ -102,51 +102,54 @@ export default function Dashboard() {
 	return (
 		<div
 			className={cn(
-				'min-h-screen max-w-6xl mx-auto ',
 				tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
 			)}
 		>
-			{/* Navbar */}
-			<Navbar
-				tenantId={tenantId}
-				setTenantId={setTenantId}
-				isLoading={isLoading}
-				handleTenantSelect={handleTenantSelect}
-				clearTenant={clearTenant}
-			/>
+			<div className='min-h-screen max-w-6xl mx-auto '>
+				{/* Navbar */}
+				<Navbar
+					tenantId={tenantId}
+					setTenantId={setTenantId}
+					isLoading={isLoading}
+					handleTenantSelect={handleTenantSelect}
+					clearTenant={clearTenant}
+				/>
 
-			{/* Sidebar and Main Content */}
-			<div className='flex h-full'>
-				{/* Sidebar */}
-				{tenant && <SideBar setTenantId={handleTenantSelect} tenant={tenant} />}
-				{/* Main Content */}
-				<main
-					className={cn(
-						'flex-1 p-6 mt-16',
-						tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+				{/* Sidebar and Main Content */}
+				<div className='flex h-full'>
+					{/* Sidebar */}
+					{tenant && (
+						<SideBar setTenantId={handleTenantSelect} tenant={tenant} />
 					)}
-				>
-					{!tenant ? (
-						<SelectTenant
-							setTenantId={setTenantId}
-							tenantId={tenantId}
-							isLoading={isLoading}
-							handleTenantSelect={handleTenantSelect}
-						/>
-					) : (
-						<div>
-							<h1
-								className={`text-2xl font-semibold font-spaceGrotesk animate-fade-in space-grotesk mb-4 ${
-									tenant.config.theme === 'dark' ? 'text-white' : 'text-black'
-								}`}
-							>
-								Welcome to {tenant.name} Dashboard
-							</h1>
-							<DashboardModules tenant={tenant} />
-						</div>
-					)}
-					<Toaster />
-				</main>
+					{/* Main Content */}
+					<main
+						className={cn(
+							'flex-1 p-6 mt-16',
+							tenant?.config.theme === 'dark' ? 'bg-gray-900' : 'bg-white'
+						)}
+					>
+						{!tenant ? (
+							<SelectTenant
+								setTenantId={setTenantId}
+								tenantId={tenantId}
+								isLoading={isLoading}
+								handleTenantSelect={handleTenantSelect}
+							/>
+						) : (
+							<div>
+								<h1
+									className={`text-2xl font-semibold font-spaceGrotesk animate-fade-in space-grotesk mb-4 ${
+										tenant.config.theme === 'dark' ? 'text-white' : 'text-black'
+									}`}
+								>
+									Welcome to {tenant.name} Dashboard
+								</h1>
+								<DashboardModules tenant={tenant} />
+							</div>
+						)}
+						<Toaster />
+					</main>
+				</div>
 			</div>
 		</div>
 	)
